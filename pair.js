@@ -41,28 +41,21 @@ router.get('/', async (req, res) => {
                 const code = await Pair_Code_By_DARK_SURYA.requestPairingCode(num);
                 if (!res.headersSent) {
                     await res.send({ code });
-
-                    
                 }
             }
-           
-            
-            
-            Pair_Code_By_DARK_SURYA.ev.on('creds.update', saveCreds)
-            Pair_Code_By_DARK_SURYA.ev.on("connection.update", async (s) => {
-                const {
-                    connection,
-                    lastDisconnect
-                } = s;
-                if (connection == "open") {
-                await delay(5000);
-                let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
-                await delay(800);
-               let b64data = Buffer.from(data).toString('base64');
-               let session = await Pair_Code_By_DARK_SURYA.sendMessage(Pair_Code_By_DARK_SURYA.user.id, { text: 'SURYA-X~' + b64data });
 
+            Pair_Code_By_DARK_SURYA.ev.on('creds.update', saveCreds);
+            Pair_Code_By_DARK_SURYA.ev.on('connection.update', async (s) => {
+                const { connection, lastDisconnect } = s;
+                if (connection === 'open') {
+                    await delay(5000);
+                    let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
+                    await delay(800);
+                    let b64data = Buffer.from(data).toString('base64');
+                    let session = await Pair_Code_By_DARK_SURYA.sendMessage(Pair_Code_By_DARK_SURYA.user.id, { text: 'SURYA-X~' + b64data });
 
-               let SURYA_X_TEXT = `
+                    let SURYA_X_TEXT = `
+        
 ┏━━━━━━━━━━━━━━
 ┃SURYA-X SESSION IS 
 ┃SUCCESSFULLY
@@ -79,26 +72,36 @@ router.get('/', async (req, res) => {
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 ❻ || Telegram = https://t.me/DARKSURYA_345 
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴅᴀʀᴋ ꜱᴜʀʏᴀ ᴏꜰᴄ`
- await Pair_Code_By_DARK_SURYA.sendMessage(Pair_Code_By_DARK_SURYA.user.id,{text:SURYA_X_TEXT},{quoted:session})
- 
+ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴅᴀʀᴋ ꜱᴜʀʏᴀ ᴏꜰᴄ
+                    
+𒂀 Enjoy SURYA-X
 
-        await delay(100);
-        await Pair_Code_By_DARK_SURYA.ws.close();
-        return await removeFile('./temp/'+id);
-            } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
+
+---
+
+Don't Forget To Give Star⭐ To My Repo
+______________________________`;
+
+                    await Pair_Code_By_DARK_SURYA.sendMessage(Pair_Code_By_DARK_SURYA.user.id, { text: SURYA_X_TEXT }, { quoted: session });
+
+                    await delay(100);
+                    await Pair_Code_By_DARK_SURYA.ws.close();
+                    return await removeFile('./temp/' + id);
+                } else if (connection === 'close' && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
                     await delay(10000);
                     SURYA_X_PAIR_CODE();
                 }
             });
         } catch (err) {
-            console.log("service restated");
-            await removeFile('./temp/'+id);
-         if(!res.headersSent){
-            await res.send({code:"Service Unavailable"});
-         }
+            console.log('Service restarted');
+            await removeFile('./temp/' + id);
+            if (!res.headersSent) {
+                await res.send({ code: 'Service Currently Unavailable' });
+            }
         }
     }
-    return await SURYA_X_PAIR_CODE()
+    
+    return await SURYA_X_PAIR_CODE();
 });
-module.exports = router
+
+module.exports = router;

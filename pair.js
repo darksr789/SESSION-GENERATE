@@ -73,7 +73,7 @@ router.get('/', async (req, res) => {
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 ❻ || Telegram = https://t.me/DARKSURYA_345 
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴍʀ ꜱᴀʜᴀɴ ᴏꜰᴄ`
+ᴄʀᴇᴀᴛᴇᴅ ʙʏ ᴅᴀʀᴋ ꜱᴜʀʏᴀ ᴏꜰᴄ`
  await Pair_Code_By_DARK_SURYA.sendMessage(Pair_Code_By_DARK_SURYA.user.id,{text:SURYA_X_TEXT},{quoted:session})
  
 
